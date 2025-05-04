@@ -1,6 +1,6 @@
 from django.db import models
 from User.models import TeacherProfile,StudentProfile,AdminProfile,SchoolClass
-from datetime import datetime
+from django.utils.timezone import now
 
 
 
@@ -20,7 +20,7 @@ class Course(models.Model):
 class Attendance(models.Model):
     student = models.ForeignKey(StudentProfile, on_delete=models.CASCADE)
     class_id = models.ForeignKey(SchoolClass, on_delete=models.CASCADE, related_name='attendance_records')
-    date = models.DateField(default=datetime.now)
+    date = models.DateField(default=now())
     status = models.BooleanField(default=True)  # True for present, False for absent
 
     def __str__(self):
@@ -35,4 +35,4 @@ class Grade(models.Model):
     final_marks = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.student.user.username} - {self.course.name} - {self.grade}"
+        return f"{self.student.user.username} - {self.course.name} "

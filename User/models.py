@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from datetime import datetime
+from django.utils.timezone import now
+
 
 
 # Create your models here.
@@ -46,7 +47,7 @@ class TeacherProfile(models.Model):
     admin = models.ForeignKey(AdminProfile, on_delete=models.CASCADE, related_name='admin_teachers')
     employee_id = models.CharField(max_length=20, unique=True)
     specialization = models.CharField(max_length=100)
-    hire_date = models.DateField(default=datetime.now)
+    hire_date = models.DateField(default=now())
     class_id = models.ForeignKey(SchoolClass, on_delete=models.CASCADE, related_name='teacher_classes',null=True,blank=True)  # Assuming Class model exists
     class_assiging_time = models.DateTimeField(null=True, blank=True)
 
@@ -61,6 +62,11 @@ class StudentProfile(models.Model):
     guardian_name = models.CharField(max_length=100, blank=True)
     guardian_contact = models.CharField(max_length=15, blank=True)
     student_class = models.ForeignKey(SchoolClass, on_delete=models.SET_NULL, null=True)  # Uncomment if Class model exists
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['student_class', 'roll_no'], name='unique_roll_per_class')
+        ]
 
     def __str__(self):
         return self.user.username
