@@ -1,0 +1,31 @@
+<div class="modal fade" id="gradeModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Submit Grade</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="post" id="gradeForm">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="first_term_marks" class="form-label">First Term Marks</label>
+                        <input type="number" class="form-control" id="first_term_marks" name="first_term_marks" min="0" max="100">
+                    </div>
+                    <div class="mb-3">
+                        <label for="second_term_marks" class="form-label">Second Term Marks</label>
+                        <input type="number" class="form-control" id="second_term_marks" name="second_term_marks" min="0" max="100">
+                    </div>
+                    <div class="mb-3">
+                        <label for="final_marks" class="form-label">Final Marks</label>
+                        <input type="number" class="form-control" id="final_marks" name="final_marks" min="0" max="100">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Grade</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

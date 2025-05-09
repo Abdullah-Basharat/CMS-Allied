@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Student Dashboard - Allied School CMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Student Info Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Student Information</h5>
+                    <hr>
+                    <p><strong>Name:</strong> {{ student.user.get_full_name }}</p>
+                    <p><strong>Roll No:</strong> {{ student.roll_no }}</p>
+                    <p><strong>Class:</strong> {{ student.student_class.name }}</p>
+                    <p><strong>Guardian:</strong> {{ student.guardian_name }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card bg-info text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Attendance Rate</h5>
+                            <h2 class="card-text">{{ attendance_rate }}%</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card bg-success text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Courses</h5>
+                            <h2 class="card-text">{{ total_courses }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Courses and Grades -->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">My Courses</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Course</th>
+                                    <th>Teacher</th>
+                                    <th>First Term</th>
+                                    <th>Second Term</th>
+                                    <th>Final</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for grade in grades %}
+                                <tr>
+                                    <td>{{ grade.course.name }}</td>
+                                    <td>{{ grade.course.teacher.user.get_full_name }}</td>
+                                    <td>{{ grade.first_term_marks }}</td>
+                                    <td>{{ grade.second_term_marks }}</td>
+                                    <td>{{ grade.final_marks }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Attendance -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Recent Attendance</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        {% for record in recent_attendance %}
+                        <div class="list-group-item">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">{{ record.date }}</h6>
+                                <span class="badge {% if record.status %}bg-success{% else %}bg-danger{% endif %}">
+                                    {{ record.status|yesno:"Present,Absent" }}
+                                </span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

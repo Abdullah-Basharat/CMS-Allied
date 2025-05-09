@@ -1,0 +1,16 @@
+:root {
+    --primary-color: #114A90;   /* Navy Blue from Allied logo */
+    --secondary-color: #FFC107; /* Yellow */
+    --accent-color: #E91E63;    /* Pink Accent */
+    --text-color: #212529;
+    --background-color: #f8f9fa;
+}
+
+.btn-pink {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.btn-pink:hover {
+    background-color: #c2185b;
+}

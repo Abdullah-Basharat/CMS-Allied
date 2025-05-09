@@ -1,0 +1,37 @@
+<div class="table-responsive">
+    <table class="table table-hover grade-table">
+        <thead class="table-light">
+            <tr>
+                <th>Student</th>
+                <th>Course</th>
+                <th>First Term</th>
+                <th>Second Term</th>
+                <th>Final</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for grade in grades %}
+            <tr>
+                <td>{{ grade.student.user.get_full_name }}</td>
+                <td>{{ grade.course.name }}</td>
+                <td>{{ grade.first_term_marks }}</td>
+                <td>{{ grade.second_term_marks }}</td>
+                <td>{{ grade.final_marks }}</td>
+                <td>
+                    <button class="btn btn-sm btn-primary" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#editGradeModal" 
+                            data-grade-id="{{ grade.id }}">
+                        <i class="bi bi-pencil"></i>
+                    </button>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6" class="text-center">No grades found</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

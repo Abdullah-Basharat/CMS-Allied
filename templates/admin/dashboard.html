@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Dashboard - Allied School CMS{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- Statistics Cards -->
+        <div class="col-md-3 mb-4">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Students</h5>
+                    <h2 class="card-text">{{ total_students }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Teachers</h5>
+                    <h2 class="card-text">{{ total_teachers }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Classes</h5>
+                    <h2 class="card-text">{{ total_classes }}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Courses</h5>
+                    <h2 class="card-text">{{ total_courses }}</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activities -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Recent Students</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        {% for student in recent_students %}
+                        <a href="{% url 'student_detail' student.id %}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">{{ student.user.get_full_name }}</h6>
+                                <small>{{ student.student_class.name }}</small>
+                            </div>
+                            <small>Roll No: {{ student.roll_no }}</small>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Recent Teachers</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        {% for teacher in recent_teachers %}
+                        <a href="{% url 'teacher_detail' teacher.id %}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">{{ teacher.user.get_full_name }}</h6>
+                                <small>{{ teacher.specialization }}</small>
+                            </div>
+                            <small>Employee ID: {{ teacher.employee_id }}</small>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

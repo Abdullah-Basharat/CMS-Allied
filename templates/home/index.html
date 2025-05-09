@@ -1,0 +1,51 @@
+<!-- templates/home/index.html -->
+{% extends 'base.html' %}
+{% block title %}Welcome | Allied Public School{% endblock %}
+
+{% block content %}
+<section class="text-center py-5" style="background-color: var(--primary-color); color: white;">
+    <div class="container">
+        <h1 style="color: #f8f9fa" class="display-4 fw-bold">Welcome to Allied Public School</h1>
+        <p class="lead">Asghar Mall Campus – A Foundation for Bright Futures</p>
+        <a href="{% url 'login' %}" class="btn btn-light btn-lg mt-3">Login to Portal</a>
+    </div>
+</section>
+
+<section class="container py-5">
+    <div class="row text-center">
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Our Mission</h5>
+                    <p class="card-text">To provide high-quality education and develop morally upright, intellectually curious, and socially responsible students.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mt-4 mt-md-0">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Programs</h5>
+                    <p class="card-text">From foundational learning to academic excellence, we offer comprehensive programs tailored for all students.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mt-4 mt-md-0">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Campus Life</h5>
+                    <p class="card-text">A vibrant and safe environment that nurtures creativity, sportsmanship, and collaboration.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="text-center py-5 bg-light">
+    <div class="container">
+        <h2 class="fw-bold mb-4">Join Our School Community</h2>
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Get Started</a>
+    </div>
+</section>
+{% endblock %}
